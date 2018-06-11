@@ -4,20 +4,20 @@ import android.content.Context;
 
 import java.util.List;
 
-import tobeapps.intigral.Model.Player;
+import tobeapps.intigral.Model.TeamPlayerModel;
 
 
 /**
  * Created by HP on 6/10/2018.
  */
 
-public class Presenter implements GetDataContract.Presenter, GetDataContract.onGetDataListener {
+public class TeamPresenter implements GetDataContract.Presenter, GetDataContract.onGetDataListener {
     private GetDataContract.View mGetDataView;
-    private Intractor mIntractor;
+    private TeamIntractor mIntractor;
 
-    public Presenter(GetDataContract.View mGetDataView) {
+    public TeamPresenter(GetDataContract.View mGetDataView) {
         this.mGetDataView = mGetDataView;
-        mIntractor = new Intractor(this);
+        mIntractor = new TeamIntractor(this);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Presenter implements GetDataContract.Presenter, GetDataContract.onG
     }
 
     @Override
-    public void onSuccess(List<Player> homeList, List<Player> awayList) {
+    public void onSuccess(List<TeamPlayerModel> homeList, List<TeamPlayerModel> awayList) {
         mGetDataView.onGetDataSuccess(homeList, awayList);
     }
 

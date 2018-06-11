@@ -3,21 +3,27 @@
     package="tobeapps.intigral">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
+        android:name=".App"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".View.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".Core.Service.MediaService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
 
 </manifest>

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/VideoStreamApp.iml" filepath="$PROJECT_DIR$/.idea/VideoStreamApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/intigral.iml" filepath="$PROJECT_DIR$/intigral.iml" />
+      <module fileurl="file://C:\Users\HP\new\new\VideoStreamApp\intigral.iml" filepath="C:\Users\HP\new\new\VideoStreamApp\intigral.iml" />
     </modules>
   </component>
 </project>

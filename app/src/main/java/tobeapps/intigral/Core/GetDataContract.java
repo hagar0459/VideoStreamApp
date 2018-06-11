@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import tobeapps.intigral.Model.Player;
+import tobeapps.intigral.Model.TeamPlayerModel;
 
 
 /**
@@ -13,7 +13,7 @@ import tobeapps.intigral.Model.Player;
 
 public interface GetDataContract {
     interface View {
-        void onGetDataSuccess(List<Player> homeList, List<Player> awayList);
+        void onGetDataSuccess(List<TeamPlayerModel> homeList, List<TeamPlayerModel> awayList);
 
         void onGetDataFailure(String message);
     }
@@ -28,7 +28,7 @@ public interface GetDataContract {
     }
 
     interface onGetDataListener {
-        void onSuccess(List<Player> homeList, List<Player> awayList);
+        void onSuccess(List<TeamPlayerModel> homeList, List<TeamPlayerModel> awayList);
 
         void onFailure(String message);
     }

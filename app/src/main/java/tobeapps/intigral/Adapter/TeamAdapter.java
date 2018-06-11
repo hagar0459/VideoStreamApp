@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import tobeapps.intigral.Model.Player;
+import tobeapps.intigral.Model.TeamPlayerModel;
 import tobeapps.intigral.R;
 
 
@@ -20,9 +20,9 @@ import tobeapps.intigral.R;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyViewHolder> {
     private Context context;
-    private List<Player> list = new ArrayList<>();
+    private List<TeamPlayerModel> list = new ArrayList<>();
 
-    public TeamAdapter(Context context, List<Player> list) {
+    public TeamAdapter(Context context, List<TeamPlayerModel> list) {
         this.context = context;
         this.list = list;
     }

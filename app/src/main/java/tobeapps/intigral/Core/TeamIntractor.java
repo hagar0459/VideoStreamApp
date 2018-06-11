@@ -13,20 +13,20 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tobeapps.intigral.Model.AllTeamResponse;
-import tobeapps.intigral.Model.Player;
-import tobeapps.intigral.Model.Response;
+import tobeapps.intigral.Model.TeamPlayerModel;
+import tobeapps.intigral.Model.TeamsMainResponseModel;
 import tobeapps.intigral.R;
 
 /**
  * Created by HP on 6/10/2018.
  */
 
-public class Intractor implements GetDataContract.Interactor {
-    List<Player> awayTeam = new ArrayList<>();
-    List<Player> homeTeam = new ArrayList<>();
+public class TeamIntractor implements GetDataContract.Interactor {
+    List<TeamPlayerModel> awayTeam = new ArrayList<>();
+    List<TeamPlayerModel> homeTeam = new ArrayList<>();
     private GetDataContract.onGetDataListener mOnGetDatalistener;
 
-    public Intractor(GetDataContract.onGetDataListener mOnGetDatalistener) {
+    public TeamIntractor(GetDataContract.onGetDataListener mOnGetDatalistener) {
         this.mOnGetDatalistener = mOnGetDatalistener;
     }
 
@@ -40,11 +40,11 @@ public class Intractor implements GetDataContract.Interactor {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         AllTeamResponse request = retrofit.create(AllTeamResponse.class);
-        retrofit2.Call<Response> call = request.getTeam();
-        call.enqueue(new retrofit2.Callback<Response>() {
+        retrofit2.Call<TeamsMainResponseModel> call = request.getTeam();
+        call.enqueue(new retrofit2.Callback<TeamsMainResponseModel>() {
             @Override
-            public void onResponse(Call<Response> ResponseModel, retrofit2.Response<Response> response) {
-                Response jsonResponse = response.body();
+            public void onResponse(Call<TeamsMainResponseModel> ResponseModel, retrofit2.Response<TeamsMainResponseModel> response) {
+                TeamsMainResponseModel jsonResponse = response.body();
                 if (jsonResponse.getLineups() != null && jsonResponse.getLineups().isSuccess()) {
                     if (jsonResponse.getLineups().getData() != null) {
                         if (jsonResponse.getLineups().getData().getHomeTeam() != null || jsonResponse.getLineups().getData().getAwayTeam() != null) {
@@ -74,7 +74,7 @@ public class Intractor implements GetDataContract.Interactor {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<Response> call, Throwable t) {
+            public void onFailure(retrofit2.Call<TeamsMainResponseModel> call, Throwable t) {
                 Log.v("Error", t.getMessage());
                 mOnGetDatalistener.onFailure(t.getMessage());
             }
