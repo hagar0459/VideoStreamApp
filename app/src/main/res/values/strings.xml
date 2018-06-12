@@ -14,7 +14,7 @@
     <string name="open_title">Open</string>
     <string name="Done">Done</string>
     <string name="close_title">Close</string>
-    <string name="config">Configuration</string>
+    <string name="config">Update</string>
     <string name="skip">Skip</string>
     <string name="edit_seek_hint">Seek Tim Position(00.00)</string>
 </resources>
