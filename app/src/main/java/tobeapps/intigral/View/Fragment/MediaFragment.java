@@ -21,7 +21,6 @@ import tobeapps.intigral.Core.MediaVideoApi;
 import tobeapps.intigral.Model.MediaItem;
 import tobeapps.intigral.Model.MediaSamples;
 import tobeapps.intigral.R;
-import tobeapps.intigral.View.Activity.MainActivity;
 
 /**
  * Created by HP on 6/11/2018.
@@ -108,8 +107,14 @@ public class MediaFragment extends Fragment implements VideoControlsSeekListener
         setUiFlags(true);
     }
 
-    private void exitFullscreen() {
-        setUiFlags(false);
+    public void exitFullscreen() {
+        try {
+            setUiFlags(false);
+            videoView.setMeasureBasedOnAspectRatioEnabled(true);
+            videoView.setScaleType(ScaleType.NONE);
+        } catch (Exception e) {
+
+        }
     }
 
     /**
@@ -122,7 +127,10 @@ public class MediaFragment extends Fragment implements VideoControlsSeekListener
             decorView.setSystemUiVisibility(getStableUiFlags());
             decorView.setOnSystemUiVisibilityChangeListener(fullScreenListener);
         }
+        //To enable resume after system interuption
+        //TODO:test on real device
         videoView.setHandleAudioFocus(true);
+
         //To support full screen in all device
         videoView.setMeasureBasedOnAspectRatioEnabled(false);
         videoView.setScaleType(ScaleType.FIT_XY);
@@ -139,10 +147,7 @@ public class MediaFragment extends Fragment implements VideoControlsSeekListener
         if (decorView != null) {
             decorView.setSystemUiVisibility(fullscreen ? getFullscreenUiFlags() : getStableUiFlags());
         }
-        videoView.setHandleAudioFocus(true);
-        //To support full screen in all device
-        videoView.setMeasureBasedOnAspectRatioEnabled(false);
-        videoView.setScaleType(ScaleType.FIT_XY);
+
     }
 
     /**
@@ -164,6 +169,13 @@ public class MediaFragment extends Fragment implements VideoControlsSeekListener
         return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        playlistManager.removeVideoApi(videoApi);
+        playlistManager.invokeStop();
     }
 
     /**
@@ -203,11 +215,5 @@ public class MediaFragment extends Fragment implements VideoControlsSeekListener
         public void onControlsHidden() {
             goFullscreen();
         }
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        playlistManager.removeVideoApi(videoApi);
-        playlistManager.invokeStop();
     }
 }

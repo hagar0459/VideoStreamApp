@@ -2,4 +2,8 @@
     <string name="base_url">https://devapi.dawriplus.com/</string>
     <string name="app_name">Intigral App</string>
     <string name="general_error_msg">Error Occured !</string>
+    <string name="away_team_title">Away Team</string>
+    <string name="home_team_title">Home Team</string>
+    <string name="update_slider_state_label">Open</string>
+    <string name="update_fullscreen_label">Finish Full Screen</string>
 </resources>

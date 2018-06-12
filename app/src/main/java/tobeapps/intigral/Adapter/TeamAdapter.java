@@ -1,10 +1,11 @@
 package tobeapps.intigral.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,38 +19,50 @@ import tobeapps.intigral.R;
  * Created by HP on 6/10/2018.
  */
 
-public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyViewHolder> {
+public class TeamAdapter extends BaseAdapter {
     private Context context;
     private List<TeamPlayerModel> list = new ArrayList<>();
 
-    public TeamAdapter(Context context, List<TeamPlayerModel> list) {
+    public TeamAdapter(Context context, List<TeamPlayerModel> rowItem) {
         this.context = context;
-        this.list = list;
+        this.list = rowItem;
+
     }
 
     @Override
-    public TeamAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return myViewHolder;
-    }
+    public int getCount() {
 
-    @Override
-    public void onBindViewHolder(TeamAdapter.MyViewHolder holder, int position) {
-        holder.tvPlayerName.setText(list.get(position).getName());
-    }
-
-    @Override
-    public int getItemCount() {
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvPlayerName;
+    @Override
+    public Object getItem(int position) {
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            tvPlayerName = itemView.findViewById(R.id.tv_palayer_name);
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+
+        return list.indexOf(getItem(position));
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        if (convertView == null) {
+            LayoutInflater mInflater = (LayoutInflater) context
+                    .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            convertView = mInflater.inflate(R.layout.team_adapter_list_item, null);
         }
+
+        TextView tv_palayer_name = convertView.findViewById(R.id.tv_palayer_name);
+
+        TeamPlayerModel row_pos = list.get(position);
+
+        tv_palayer_name.setText(row_pos.getName() + "( " + row_pos.getRole() + " )");
+
+        return convertView;
+
     }
 }

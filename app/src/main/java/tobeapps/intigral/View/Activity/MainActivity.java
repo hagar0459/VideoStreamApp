@@ -1,29 +1,19 @@
 package tobeapps.intigral.View.Activity;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import com.devbrackets.android.exomedia.core.video.scale.ScaleType;
-import com.devbrackets.android.exomedia.listener.VideoControlsSeekListener;
-import com.devbrackets.android.exomedia.listener.VideoControlsVisibilityListener;
-import com.devbrackets.android.exomedia.ui.widget.VideoControls;
-import com.devbrackets.android.exomedia.ui.widget.VideoView;
+import com.jkb.slidemenu.SlideMenuLayout;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import tobeapps.intigral.App;
-import tobeapps.intigral.Core.MediaPlaylistManager;
-import tobeapps.intigral.Model.MediaItem;
-import tobeapps.intigral.Model.MediaSamples;
-import tobeapps.intigral.Core.MediaVideoApi;
 import tobeapps.intigral.Adapter.TeamAdapter;
+import tobeapps.intigral.BaseActivity;
 import tobeapps.intigral.Core.GetDataContract;
 import tobeapps.intigral.Core.TeamPresenter;
 import tobeapps.intigral.Model.TeamPlayerModel;
@@ -34,41 +24,59 @@ import tobeapps.intigral.View.Fragment.MediaFragment;
  * Created by HP on 6/10/2018.
  */
 
-public class MainActivity extends AppCompatActivity implements GetDataContract.View {
+public class MainActivity extends BaseActivity implements GetDataContract.View {
     RecyclerView recyclerView;
 
     LinearLayoutManager linearLayoutManager;
     TeamAdapter homePlayersAdapter;
     TeamAdapter awayPlayersAdapter;
     private TeamPresenter mPresenter;
-
+    private Toolbar mToolbar;
+    private TextView mtToolbarUpdateSliderTxt, mtToolbarUpdateVideoPlayerTxt;
+    private SlideMenuLayout slideMenuLayout;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        Fragment detailFragment = (MediaFragment) getFragmentManager().findFragmentById(R.id.displayDetail);
-//        if(detailFragment == null){
-//            FragmentTransaction ft = getFragmentManager().beginTransaction();
-//            detailFragment = new MediaFragment();
-//            ft.replace(R.id.displayDetail, detailFragment, "Detail_Fragment1");
-//            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//            ft.commit();
+        setContentView(R.layout.activity_main_tablet);
+        mToolbar = findViewById(R.id.tool_bar);
+        mtToolbarUpdateSliderTxt = mToolbar.findViewById(R.id.txt_update_slider_state);
+        slideMenuLayout = findViewById(R.id.mainSlideMenu);
+        mtToolbarUpdateSliderTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slideMenuLayout.toggleLeftSlide();
+                slideMenuLayout.toggleRightSlide();
+
+            }
+        });
+
+        mtToolbarUpdateVideoPlayerTxt = mToolbar.findViewById(R.id.txt_update_full_media_player);
+        mtToolbarUpdateVideoPlayerTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaFragment fragment = (MediaFragment) getSupportFragmentManager().findFragmentById(R.id.mainFragment);//if you specify your fragment in xml
+
+                fragment.exitFullscreen();
+            }
+        });
+        // Setting toolbar as the ActionBar with setSupportActionBar() call
+        setSupportActionBar(mToolbar);
 
         mPresenter = new TeamPresenter(this);
         mPresenter.getDataFromURL(getApplicationContext(), getResources().getString(R.string.base_url));
-        recyclerView = findViewById(R.id.recycler);
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView = findViewById(R.id.recycler);
+//        linearLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(linearLayoutManager);
 
     }
 
     @Override
     public void onGetDataSuccess(List<TeamPlayerModel> homeTeamPlayers, List<TeamPlayerModel> awayTeamPlayers) {
-        homePlayersAdapter = new TeamAdapter(getApplicationContext(), homeTeamPlayers);
-        awayPlayersAdapter = new TeamAdapter(getApplicationContext(), awayTeamPlayers);
-        recyclerView.setAdapter(homePlayersAdapter);
+//        homePlayersAdapter = new TeamAdapter(getApplicationContext(), homeTeamPlayers);
+//        awayPlayersAdapter = new TeamAdapter(getApplicationContext(), awayTeamPlayers);
+//        recyclerView.setAdapter(homePlayersAdapter);
 
     }
 
@@ -77,7 +85,15 @@ public class MainActivity extends AppCompatActivity implements GetDataContract.V
         Log.d("Status", msg);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (slideMenuLayout.isLeftSlideOpen() || slideMenuLayout.isRightSlideOpen()) {
+            slideMenuLayout.closeLeftSlide();
+            slideMenuLayout.closeRightSlide();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 
 

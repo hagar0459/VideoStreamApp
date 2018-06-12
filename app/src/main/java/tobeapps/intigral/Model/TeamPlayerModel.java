@@ -52,4 +52,9 @@ public class TeamPlayerModel {
     public void setName(String name) {
         Name = name;
     }
+
+    @NonNull
+    public String getRole() {
+        return Role;
+    }
 }

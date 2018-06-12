@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.devbrackets.android.exomedia.ExoMedia;
-
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.TransferListener;
@@ -18,8 +17,8 @@ import com.squareup.leakcanary.LeakCanary;
 
 import java.io.File;
 
-import tobeapps.intigral.Core.MediaPlaylistManager;
 import okhttp3.OkHttpClient;
+import tobeapps.intigral.Core.MediaPlaylistManager;
 
 public class App extends Application {
     @Nullable
@@ -31,7 +30,6 @@ public class App extends Application {
 
         playlistManager = new MediaPlaylistManager(this);
         LeakCanary.install(this);
-
         configureExoMedia();
     }
 
@@ -63,4 +61,6 @@ public class App extends Application {
             }
         });
     }
+
+
 }
