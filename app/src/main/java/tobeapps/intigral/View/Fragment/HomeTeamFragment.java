@@ -23,7 +23,7 @@ public class HomeTeamFragment extends ListFragment implements GetDataContract.Vi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         isMobile = VideoStramApplication.getOrientation(getActivity());
-        if (isMobile) {
+        if (!isMobile) {
             mPresenter = new TeamPresenter(this);
             mPresenter.getDataFromURL(getActivity().getApplicationContext(), getResources().getString(R.string.base_url));
         }
@@ -40,7 +40,7 @@ public class HomeTeamFragment extends ListFragment implements GetDataContract.Vi
 
     @Override
     public void onGetDataSuccess(List<TeamPlayerModel> homeList, List<TeamPlayerModel> awayList) {
-        if (isMobile) {
+        if (!isMobile) {
 
             updateList(homeList);
         }
@@ -48,7 +48,7 @@ public class HomeTeamFragment extends ListFragment implements GetDataContract.Vi
 
     @Override
     public void onGetDataFailure(String message) {
-        if (isMobile) {
+        if (!isMobile) {
 
             Log.d("home list fail", message);
         }
