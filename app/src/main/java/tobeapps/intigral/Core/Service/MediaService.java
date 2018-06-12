@@ -3,16 +3,15 @@ package tobeapps.intigral.Core.Service;
 
 import android.support.annotation.NonNull;
 
-
 import com.devbrackets.android.playlistcore.api.MediaPlayerApi;
 import com.devbrackets.android.playlistcore.components.playlisthandler.DefaultPlaylistHandler;
 import com.devbrackets.android.playlistcore.components.playlisthandler.PlaylistHandler;
 import com.devbrackets.android.playlistcore.service.BasePlaylistService;
 
-import tobeapps.intigral.App;
+import tobeapps.intigral.Core.MediaAudioApi;
 import tobeapps.intigral.Core.MediaPlaylistManager;
 import tobeapps.intigral.Model.MediaItem;
-import tobeapps.intigral.Core.MediaAudioApi;
+import tobeapps.intigral.VideoStramApplication;
 
 /**
  * A simple service that extends {@link BasePlaylistService} in order to provide
@@ -43,7 +42,7 @@ public class MediaService extends BasePlaylistService<MediaItem, MediaPlaylistMa
     @NonNull
     @Override
     protected MediaPlaylistManager getPlaylistManager() {
-        return ((App)getApplicationContext()).getPlaylistManager();
+        return ((VideoStramApplication) getApplicationContext()).getPlaylistManager();
     }
 
     @NonNull

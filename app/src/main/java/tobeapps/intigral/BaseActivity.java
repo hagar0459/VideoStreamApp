@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import tobeapps.intigral.Core.ConnectivityChangeReceiver;
 
@@ -58,9 +57,9 @@ public class BaseActivity extends AppCompatActivity implements ConnectivityChang
     @Override
     public void onConnectivityChanged(boolean isConnected) {
         if (!isConnected) {
-            Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG).show();
+            VideoStramApplication.showToast(getApplicationContext(), getResources().getString(R.string.msg_fail_network));
         } else {
-            Toast.makeText(getApplicationContext(), "Network Connected Again", Toast.LENGTH_LONG).show();
+            VideoStramApplication.showToast(getApplicationContext(), getResources().getString(R.string.msg_success_network));
 
         }
         // TODO handle connectivity change

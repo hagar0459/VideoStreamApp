@@ -1,9 +1,20 @@
 <resources>
-    <string name="base_url">https://devapi.dawriplus.com/</string>
     <string name="app_name">Intigral App</string>
-    <string name="general_error_msg">Error Occured !</string>
     <string name="away_team_title">Away Team</string>
     <string name="home_team_title">Home Team</string>
-    <string name="update_slider_state_label">Open</string>
-    <string name="update_fullscreen_label">Finish Full Screen</string>
+    <string name="close_fullscreen">Normal View</string>
+    <string name="open_fullscreen">FullScreen View</string>
+    <string name="chk_video_title">Full Screen Video</string>
+    <string name="msg_general_error">Error Occured !</string>
+    <string name="msg_seek_error">Seek Time Error</string>
+    <string name="msg_empty_config_error">Please Fill Empty Configuration</string>
+    <string name="msg_success_network">Network Connected Again</string>
+    <string name="msg_fail_network">Network Error</string>
+    <string name="msg_no_players">No Players!</string>
+    <string name="open_title">Open</string>
+    <string name="Done">Done</string>
+    <string name="close_title">Close</string>
+    <string name="config">Configuration</string>
+    <string name="skip">Skip</string>
+    <string name="edit_seek_hint">Seek Tim Position(00.00)</string>
 </resources>

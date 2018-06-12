@@ -10,8 +10,8 @@ import tobeapps.intigral.Core.MediaPlaylistManager;
  * to hold the information pertaining to the audio and video items
  */
 public class MediaItem implements PlaylistItem {
-    private MediaSamples.MediaSampleList sample;
     boolean isAudio;
+    private MediaSamples.MediaSampleList sample;
 
     public MediaItem(MediaSamples.MediaSampleList sample, boolean isAudio) {
         this.sample = sample;
@@ -61,7 +61,7 @@ public class MediaItem implements PlaylistItem {
 
     @Override
     public String getAlbum() {
-        return "PlaylistCore Demo";
+        return "القناة السعودية الأولى";
     }
 
     @Override

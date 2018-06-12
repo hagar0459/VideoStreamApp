@@ -55,19 +55,19 @@ public class TeamIntractor implements GetDataContract.Interactor {
                             mOnGetDatalistener.onSuccess(homeTeam, awayTeam);
 
                         } else {
-                            mOnGetDatalistener.onFailure(context.getResources().getString(R.string.general_error_msg));
+                            mOnGetDatalistener.onFailure(context.getResources().getString(R.string.msg_general_error));
 
                         }
 
 
                     } else {
-                        mOnGetDatalistener.onFailure(context.getResources().getString(R.string.general_error_msg));
+                        mOnGetDatalistener.onFailure(context.getResources().getString(R.string.msg_general_error));
 
                     }
 
 
                 } else {
-                    mOnGetDatalistener.onFailure(context.getResources().getString(R.string.general_error_msg));
+                    mOnGetDatalistener.onFailure(context.getResources().getString(R.string.msg_general_error));
 
                 }
 

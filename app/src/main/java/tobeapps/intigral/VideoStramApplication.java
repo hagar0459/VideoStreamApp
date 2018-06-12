@@ -1,8 +1,12 @@
 package tobeapps.intigral;
 
 import android.app.Application;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.devbrackets.android.exomedia.ExoMedia;
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
@@ -20,9 +24,31 @@ import java.io.File;
 import okhttp3.OkHttpClient;
 import tobeapps.intigral.Core.MediaPlaylistManager;
 
-public class App extends Application {
+public class VideoStramApplication extends Application {
     @Nullable
     private MediaPlaylistManager playlistManager;
+
+    public static boolean getOrientation(Context context) {
+        DisplayMetrics dm = new DisplayMetrics();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE))
+                .getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        int dens = dm.densityDpi;
+        double wi = (double) width / (double) dens;
+        double hi = (double) height / (double) dens;
+        double x = Math.pow(wi, 2);
+        double y = Math.pow(hi, 2);
+        double screenInches = Math.sqrt(x + y);
+        boolean orientation = true;
+        orientation = !(screenInches > 6.0);
+
+        return orientation;
+    }
+
+    public static void showToast(Context activity, String msg) {
+        Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void onCreate() {
@@ -61,6 +87,4 @@ public class App extends Application {
             }
         });
     }
-
-
 }

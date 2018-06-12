@@ -41,6 +41,7 @@ public class HomeAwayTeamsPagerFragment extends Fragment implements GetDataContr
         View view = inflater.inflate(R.layout.fragment_home_away_pager, container, false);
         tabs = view.findViewById(R.id.result_tabs);
         viewPager = view.findViewById(R.id.viewpager);
+
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -69,8 +70,10 @@ public class HomeAwayTeamsPagerFragment extends Fragment implements GetDataContr
         adapter = new Adapter(getChildFragmentManager());
         AwayFrament = new AwayTeamFragment();
         HomeFrament = new HomeTeamFragment();
+
         adapter.addFragment(AwayFrament, getResources().getString(R.string.away_team_title));
         adapter.addFragment(HomeFrament, getResources().getString(R.string.home_team_title));
+
         viewPager.setAdapter(adapter);
 
     }
@@ -79,12 +82,13 @@ public class HomeAwayTeamsPagerFragment extends Fragment implements GetDataContr
     public void onGetDataSuccess(List<TeamPlayerModel> homeList, List<TeamPlayerModel> awayList) {
         AwayFrament.updateList(awayList);
         HomeFrament.updateList(homeList);
+
     }
 
     @Override
     public void onGetDataFailure(String message) {
 
-        Log.d("retrive palyer list", message);
+        Log.d("palyer list fail", message);
     }
 
     static class Adapter extends FragmentPagerAdapter {
